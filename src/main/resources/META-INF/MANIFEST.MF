@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Main-Class: com.renaud.test.Main
+Class-Path: simpleclient_hotspot-0.8.1.jar com.dematis.themis-1.0-SNAPSH
+ OT.jar simpleclient_httpserver-0.8.1.jar commons-codec-1.11.jar c3p0-0.
+ 9.5.5.jar protobuf-java-3.6.1.jar pherialize-1.2.4.jar mchange-commons-
+ java-0.2.19.jar httpcore-4.4.12.jar jaxb-api-2.3.0.jar slf4j-api-1.7.30
+ .jar simpleclient_pushgateway-0.8.1.jar reflections-0.9.12.jar mysql-co
+ nnector-java-8.0.19.jar javassist-3.26.0-GA.jar httpclient-4.5.10.jar c
+ ommons-cli-1.4.jar gson-2.8.6.jar logback-classic-1.0.13.jar simpleclie
+ nt-0.8.1.jar simpleclient_common-0.8.1.jar commons-logging-1.2.jar logb
+ ack-core-1.0.13.jar
+
