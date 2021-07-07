@@ -23,7 +23,7 @@ public class ApplicationTest {
         final ConfigFile c1 = ConfigFile.empty();
         c1.set(EnumConfig.SERVER_PORT, "8020");
         c1.set(EnumConfig.STORAGE_TYPE, EnumConfig.EnumStorageType.SQLITE);
-        c1.set(EnumConfig.SQLITE_FILE, ":memory:");
+        c1.set(EnumConfig.STORAGE_FILE, ":memory:");
         final Application a1 = new Application(c1, null);
         Assert.assertEquals(SqliteStorage.class, a1.getStorage().getClass());
 

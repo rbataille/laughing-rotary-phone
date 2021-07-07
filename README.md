@@ -15,8 +15,8 @@ Si votre utilisateur [n'est pas dans le groupe docker](https://docs.docker.com/e
 
 Si le build c'est bien déroulé, les routes suivantes sont disponibles:
  - [La Javadoc](http://localhost:8001/index.html)
- - [les metrics](http://localhost:8000/metrics)
- - [Le endpoint "métier" ](http://localhost:8000/app?int1=5&int2=8&limit=1000&str1=foo&str2=bar)
+- [Le endpoint "métier" ](http://localhost:8000/app?int1=5&int2=8&limit=1000&str1=foo&str2=bar)
+- [les metrics](http://localhost:8000/metrics)
  
 
 Pour lancer le jar a la main ``mvn clean package && java -jar target/com.renaud.larp-1.0-SNAPSHOT-jar-with-dependencies.jar -config /app/config/config.ini``

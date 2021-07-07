@@ -28,6 +28,7 @@ public class AppHandler extends AbstractHandler {
     /**
      * Handle an http request on the server.
      *
+     * @see AppHandler#run(Request)
      * @param request An incoming HttpRequest.
      * @return a Response object.
      */
@@ -49,11 +50,11 @@ public class AppHandler extends AbstractHandler {
      * then we generate an array of numbers from start (or 1) to limit.
      * After that we fizzbuzz our list using str1 and str2.
      *
-     * @param request The incoming request.
+     * @param request The incoming request, need to have 5 parameters int1, int2, limit, str1, and str2.
      * @return The server response as json.
      * @throws IllegalArgumentException This exception rise when one or more parameters are missing or when int1,int2,limit are not numeric.
      */
-    private Response run(final Request request) throws IllegalArgumentException {
+    public Response run(final Request request) throws IllegalArgumentException {
         final Map<String, String> parameters = request.getParameters();
         final StringJoiner queryBuilder = new StringJoiner(";");
         final int int1 = this.getIntParameter(parameters, "int1", queryBuilder);

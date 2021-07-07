@@ -21,7 +21,7 @@ public class SqliteStorageTest {
     public void fullTest() throws IOException, SQLException, PropertyVetoException {
         final String filePath = ":memory:";
         final ConfigFile configFile = new ConfigFile();
-        configFile.set(EnumConfig.SQLITE_FILE, "src/test/resources/data/test_application.sql");
+        configFile.set(EnumConfig.STORAGE_FILE, "src/test/resources/data/test_application.sql");
         final SqliteStorage storage = new SqliteStorage(configFile);
         this.cleanDatabase(storage);
 

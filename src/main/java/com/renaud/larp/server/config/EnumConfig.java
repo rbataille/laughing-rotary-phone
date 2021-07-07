@@ -15,15 +15,7 @@ public enum EnumConfig {
     /**
      * Sqlite file to store data.
      */
-    SQLITE_FILE("sqlite.file", "data/application.sql"),
-    /**
-     * Sqlite file to store data.
-     */
     SQLITE_TABLE("sqlite.table", "logs"),
-    /**
-     * Sqlite file to store data.
-     */
-    SQLITE_DB("sqlite.db", "application"),
     /**
      * The current http server port default to 8000.
      */
