@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        window.onload = function () {
+            $.ajax({
+                url: '/metrics',
+                success:function($response){
+                    if($response.state !== 'success'){
+                        return;
+                    }
+                    const points = [];
+                    let first = null;
+                    for(const key in $response.results){
+                        const entry = $response.results[key];
+                        if(first == null){
+                            first = entry;
+                        }
+                        points.push({
+                            y: parseInt(entry.count),
+                            label: entry.query
+                        });
+                    }
+                    console.log(first);
+                    var options = {
+                        title: {
+                            text: "Requetes les plus jouées"
+                        },
+                        subtitles: [{
+                            text: "Requete la plus jouée : "+(first.query == null ? '': first.query)
+                        }],
+                        animationEnabled: true,
+                        data: [{
+                            type: "pie",
+                            startAngle: 40,
+                            toolTipContent: "<b>{label}</b>: {y}%",
+                            showInLegend: "true",
+                            legendText: "{label}",
+                            indexLabelFontSize: 16,
+                            indexLabel: "{label} - {y}%",
+                            dataPoints: points
+                        }]
+                    };
+                    $("#chartContainer").CanvasJSChart(options);
+
+                }
+            })
+
+        }
+    </script>
+    <title>Stats</title>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>

@@ -17,6 +17,10 @@ public class Response {
         this.addHeader("Content-Type", "text/html");
     }
 
+    public String getBody(){
+        return this.body;
+    }
+
     public void addHeader(final String aKey, final String aValue) {
         this.headers.put(aKey, aValue);
     }

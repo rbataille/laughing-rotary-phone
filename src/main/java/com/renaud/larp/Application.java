@@ -2,6 +2,7 @@ package com.renaud.larp;
 
 import com.renaud.larp.handlers.AppHandler;
 import com.renaud.larp.handlers.MetricsHandler;
+import com.renaud.larp.handlers.StatsHandler;
 import com.renaud.larp.server.RouteHandler;
 import com.renaud.larp.server.config.ConfigFile;
 import com.renaud.larp.server.config.EnumConfig;
@@ -93,12 +94,13 @@ public class Application {
         LOG.debug("Start HTTP server on port '{}'", targetPort);
         final HttpServer server = HttpServer.create(new InetSocketAddress(targetPort), 0);
 
-        // Endpoints
         final RouteHandler routeHandler = new RouteHandler();
-        // App
+        // App endpoint
         routeHandler.registerHandler(new AppHandler(this.storage, "/app"));
-        // Metrics
+        // Metrics endpoint
         routeHandler.registerHandler(new MetricsHandler(this.storage, "/metrics"));
+        // Stats endpoint
+        routeHandler.registerHandler(new StatsHandler(this.storage, "/stats"));
 
         server.createContext("/", routeHandler);
         server.setExecutor(Executors.newCachedThreadPool());
