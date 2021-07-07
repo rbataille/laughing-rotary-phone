@@ -1,12 +1,12 @@
 version: '3.2'
 services:
-  app_test:
+  application:
     image: application:latest
     ports:
       - "8000:8000"
     volumes:
       - ./data:/app/data
-  app_documentation:
+  documentation:
     image: nginx
     ports:
       - "8001:80"
