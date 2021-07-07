@@ -69,15 +69,17 @@ public class AppHandler extends AbstractHandler {
         for (int i = start; i <= limit; ++i) {
             final boolean isModuloInt1 = (i % int1 == 0);
             final boolean isModuloInt2 = (i % int2 == 0);
-            if (isModuloInt1 && isModuloInt2) {
-                joiner.add(str1 + str2);
-            } else if (isModuloInt1) {
-                joiner.add(str1);
-            } else if (isModuloInt2) {
-                joiner.add(str2);
-            } else {
-                joiner.add(Integer.toString(i));
+            String str = "";
+            if (isModuloInt1) {
+                str += str1;
             }
+            if (isModuloInt2) {
+                str += str2;
+            }
+            if(!isModuloInt1 && !isModuloInt2) {
+                str = Integer.toString(i);
+            }
+            joiner.add(str);
         }
         // Log the query in our backend.
         this.storage.increment(queryBuilder.toString());
