@@ -1,7 +1,7 @@
 # Test T03.
 
-## Présentation.
-Ce serveur possède deux end points.
+## Intro
+Ce serveur expose deux endpoints (+1).
 
 - ***/app*** accepte 5 parametres, **int1**, **int2**, **limit**, **str1**, **str2**, et renvois une liste de strings avec les nombres de 1 à **limit**, ou :  tous les multiples de **int1** sont remplacés par **str1**, tous les multiples de **int2** sont remplacés par **str2** et tous les multiples de **int1** et **int2** sont remplacés par **str1str2**.
 - ***/metrics*** permet d'obtenir des statistiques sur les requetes les plus utilisé lors de l'appel à **/app**
@@ -17,7 +17,7 @@ Si le build c'est bien déroulé, les routes suivantes sont disponibles:
  - [La Javadoc](http://localhost:8001/index.html)
 - [Le endpoint "métier" ](http://localhost:8000/app?int1=5&int2=8&limit=1000&str1=foo&str2=bar)
 - [les metrics](http://localhost:8000/metrics)
- 
+
 
 Pour lancer le jar a la main ``mvn clean package && java -jar target/com.renaud.larp-1.0-SNAPSHOT-jar-with-dependencies.jar -config /app/config/config.ini``
 
