@@ -21,3 +21,4 @@ Si le build c'est bien déroulé, les routes suivantes sont disponibles:
 
 Pour lancer le jar a la main ``mvn clean package && java -jar target/com.renaud.larp-1.0-SNAPSHOT-jar-with-dependencies.jar -config /app/config/config.ini``
 
+Pour supprimer les containers : ``docker-compose down``.
