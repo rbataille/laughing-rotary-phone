@@ -21,8 +21,9 @@ public class MetricsHandler extends AbstractHandler {
     }
 
     /**
-     * @param counters
-     * @return
+     * Convert a List of LogLine to a JsonArray.
+     * @param counters List of LogLine extracted from backend.
+     * @return JsonArray
      */
     private static JsonArray countersToJsonArray(final List<LogLine> counters) {
         final JsonArray lines = new JsonArray();
@@ -33,6 +34,11 @@ public class MetricsHandler extends AbstractHandler {
         return lines;
     }
 
+    /**
+     * The /metrics endpoint, retrieve elements from storage, and convert them to a json response.
+     * @param request@return a Response object.
+     * @return JsonResponse of the metrics.
+     */
     @Override
     public Response responseFromRequest(final Request request) {
         final List<LogLine> counters = this.storage.elements();

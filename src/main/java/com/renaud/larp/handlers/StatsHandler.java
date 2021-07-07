@@ -5,17 +5,13 @@ import com.renaud.larp.server.http.JsonResponse;
 import com.renaud.larp.server.http.Request;
 import com.renaud.larp.server.http.Response;
 import com.renaud.larp.server.storage.AbstractStorage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class StatsHandler extends AbstractHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(StatsHandler.class);
 
     /**
      * Basic constructor.
@@ -28,10 +24,11 @@ public class StatsHandler extends AbstractHandler {
     }
 
     /**
-     * Handle an http request on the server.
+     * Handle a request on the endpoint /stats.
+     * Return the file  located at public/stats.html
      *
      * @param request An incoming HttpRequest.
-     * @return a Response object.
+     * @return a Response object as HTML if the file exists, as JSON if the file doesnt exists.
      */
     @Override
     public Response responseFromRequest(final Request request) {

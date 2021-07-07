@@ -26,9 +26,9 @@ public class AppHandler extends AbstractHandler {
     }
 
     /**
-     * Handle an http request on the server.
+     * The /app endpoint
      *
-     * @see AppHandler#run(Request)
+     * @see AppHandler#run(Request) for complete description of the endpoint.
      * @param request An incoming HttpRequest.
      * @return a Response object.
      */
