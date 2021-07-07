@@ -35,10 +35,6 @@ public class StatsHandler extends AbstractHandler {
      */
     @Override
     public Response responseFromRequest(final Request request) {
-        final Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        LOG.info("Current absolute path is: " + s);
-
         final String filePath = "public/stats.html";
         try {
             final byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));
