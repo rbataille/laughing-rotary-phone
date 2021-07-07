@@ -5,4 +5,10 @@ services:
     ports:
       - "8000:8000"
     volumes:
-    - ./data:/app/data
+      - ./data:/app/data
+  app_documentation:
+    image: nginx
+    ports:
+      - "8001:80"
+    volumes:
+      - ./target/site/apidocs/:/usr/share/nginx/html

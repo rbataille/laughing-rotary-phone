@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: com.renaud.test.Main
+Main-Class: com.renaud.larp.Main
 Class-Path: simpleclient_hotspot-0.8.1.jar com.dematis.themis-1.0-SNAPSH
  OT.jar simpleclient_httpserver-0.8.1.jar commons-codec-1.11.jar c3p0-0.
  9.5.5.jar protobuf-java-3.6.1.jar pherialize-1.2.4.jar mchange-commons-

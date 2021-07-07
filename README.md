@@ -1,47 +1,23 @@
-# Serveur de graph Hive.
+# Test T03.
 
 ## Présentation.
-Le serveur de graph Hive permet de charger et garder en mémoire les formulaires des clients.
+Ce serveur possède deux end points.
 
-Pour chaques formulaires, un graph est créé; Ce graph est une copie de celui du formulaire type correspondant.
+- ***/app*** accepte 5 parametres, **int1**, **int2**, **limit**, **str1**, **str2**, et renvois une liste de strings avec les nombres de 1 à **limit**, ou :  tous les multiples de **int1** sont remplacés par **str1**, tous les multiples de **int2** sont remplacés par **str2** et tous les multiples de **int1** et **int2** sont remplacés par **str1str2**.
+- ***/metrics*** permet d'obtenir des statistiques sur les requetes les plus utilisé lors de l'appel à **/app**
 
 ## Installation
-Initiliser le docker en mode swarm (docker swarm init)
+Il est nécessaire de posséder [docker](https://docs.docker.com/get-docker/) && [docker-compose](https://docs.docker.com/compose/install/).
 
-Créer le reseau [apps-network](https://docs.docker.com/network/overlay/) :
+Pour executer les tests unitaires, génerer la doc et lancer le serveur il faut executer la commande ``./build.sh``
 
-docker network create -d overlay apps-network --attachable
+Si votre utilisateur [n'est pas dans le groupe docker](https://docs.docker.com/engine/install/linux-postinstall/), il faut préfixer la commande par sudo
 
-Pour installer hive en local, il suffit de lancer le script :     
-``./build_local.sh``
+Si le build c'est bien déroulé, les routes suivantes sont disponibles:
+ - [La Javadoc](http://localhost:8001/index.html)
+ - [les metrics](http://localhost:8000/metrics)
+ - [Le endpoint "métier" ](http://localhost:8000/app?int1=5&int2=8&limit=1000&str1=foo&str2=bar)
+ 
 
-Il est necessaire d'installer [Apache Maven](https://maven.apache.org/) ainsi que Java 11 (La version 8 n'a pas été testée), ainsi que docker (en mode swarm) et docker-compose.
+Pour lancer le jar a la main ``mvn clean package && java -jar target/com.renaud.larp-1.0-SNAPSHOT-jar-with-dependencies.jar -config /app/config/config.ini``
 
-Le script de build local va créer la stack *hive*.
-Pour des details sur la configuration de la stack, se référer au fichier [local-docker-compose.yml](./local-docker-compose.yml).
-
-Le docker-compose attache la stack aux reseau externes suivant : apps-network, bridge.
-
-
-## Configuration.
-Le fichier de configuration est spécifié au lancement de l'executable;
-
-``java -jar /app/hive.jar -config /app/config/config.ini``
-
-Voici les différentes options disponibles:
- * **mysql.host** (valeur par defaut : 127.0.0.1) adresse ip du serveur mysql qui contient la base des formulaires.
- * **mysql.user** (valeur par defaut : root) utilisateur avec lequel se connecter au serveur mysql.
- * **mysql.password** (valeur par defaut : dematis) mot de passe de connection au serveur mysql.
- * **mysql.db** (valeur par defaut : forms-app) nom de la base de donnée.
- * **forms.ttl** (valeur par defaut : 60000) durée de vie d'un formulaire (en millisecondes).
- * **server.port** (valeur par defaut : 8001) port d'écoute du serveur hive.
- * **kafka.bootstrap.servers** (valeur par defaut : PLAINTEXT://192.168.2.185:9092) url vers le serveur kafka.
- * **kafka.validation.topic** (valeur par defaut : forms-validation-topic) topic vers lequel envoyer les données de validations.
- * **debug** (valeur par defaut : false **! ne pas mettre à true en prod !**) mis à true, cette option permet d'afficher plus de logs.
-
-
-## Liens utiles  
-
- * [/swarm/init](https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/)
- * [/stack/deploy](https://docs.docker.com/engine/reference/commandline/stack_deploy/)
- * [/network/create](https://docs.docker.com/network/overlay/)
