@@ -15,9 +15,10 @@ Si votre utilisateur [n'est pas dans le groupe docker](https://docs.docker.com/e
 
 Si le build c'est bien déroulé, les routes suivantes sont disponibles:
  - [La Javadoc](http://localhost:8001/index.html)
-- [Le endpoint "métier" ](http://localhost:8000/app?int1=5&int2=8&limit=1000&str1=foo&str2=bar)
-- [les metrics](http://localhost:8000/metrics)
-- [La page de stats](http://localhost:8000/stats) Affiche une page de stats qui utilise la lib CanvasJS pour afficher un graph.
+ - [Le endpoint "métier" ](http://localhost:8000/app?int1=5&int2=8&limit=1000&str1=foo&str2=bar)
+ - [les metrics](http://localhost:8000/metrics)
+ - [La page de stats](http://localhost:8000/stats) Affiche une page de stats qui utilise la lib CanvasJS pour afficher un graph.
+ - Autre : [Page sonarcloud](https://sonarcloud.io/dashboard?id=rbataille_laughing-rotary-phone)
 
 
 Pour lancer le jar a la main ``mvn clean package && java -jar target/com.renaud.larp-1.0-SNAPSHOT-jar-with-dependencies.jar -config /app/config/config.ini``
