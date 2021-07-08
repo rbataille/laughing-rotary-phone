@@ -1,4 +1,5 @@
 # Test T03.
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rbataille_laughing-rotary-phone&metric=alert_status)](https://sonarcloud.io/dashboard?id=rbataille_laughing-rotary-phone)
 
 ## Intro
 Ce serveur expose deux endpoints (+2).
