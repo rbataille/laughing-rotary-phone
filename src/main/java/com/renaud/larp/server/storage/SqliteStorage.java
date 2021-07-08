@@ -48,12 +48,12 @@ public class SqliteStorage extends AbstractStorage {
     @Override
     public void increment(final String aKey) {
         try (final Connection connection = SqliteStorage.getConnection(this)) {
-            final String tableName = this.configFile.getString(EnumConfig.SQLITE_TABLE);
-            try (final PreparedStatement statement = connection.prepareStatement("INSERT INTO " + tableName + " (`query`, `count`)  VALUES(?, 1)")) {
+            try (final PreparedStatement statement = connection.prepareStatement("INSERT INTO 'logs' (`query`, `count`)  VALUES(?, 1)")) {
                 statement.setString(1, aKey);
                 statement.execute();
             }
         } catch (final SQLException | PropertyVetoException ignored) {
+            // Nothing to do here
         }
     }
 
@@ -65,8 +65,7 @@ public class SqliteStorage extends AbstractStorage {
     public List<LogLine> elements() {
         final InMemoryStorage storage = new InMemoryStorage();
         try (final Connection connection = SqliteStorage.getConnection(this)) {
-            final String tableName = this.configFile.getString(EnumConfig.SQLITE_TABLE);
-            try  (final PreparedStatement statement = connection.prepareStatement("SELECT query, SUM(count) as total FROM " + tableName + " GROUP BY query ORDER BY total DESC")) {
+            try  (final PreparedStatement statement = connection.prepareStatement("SELECT query, SUM(count) as total FROM 'logs' GROUP BY query ORDER BY total DESC")) {
                 final ResultSet results = statement.executeQuery();
                 while (results.next()) {
                     final String query = results.getString("query");
