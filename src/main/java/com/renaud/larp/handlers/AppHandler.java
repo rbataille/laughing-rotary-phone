@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 public class AppHandler extends AbstractHandler {
-
+    static final Integer MINIMAL_INT = 1;
     static final String HELP_DESCRIPTION = "Returns a list of strings with numbers from 1 to limit, where: all multiples of int1 are replaced by str1, all multiples of int2\n" +
             " are replaced by str2, all multiples of int1 and int2 are replaced by str1str2.";
 
@@ -103,10 +103,6 @@ public class AppHandler extends AbstractHandler {
         }
     }
 
-    private int getIntParameter(final Map<String, String> aParameters, final String aKey, final StringJoiner queryBuilder) throws IllegalArgumentException {
-        return this.getIntParameter(aParameters, aKey, queryBuilder, 1);
-    }
-
     /**
      * Return an int from the aParameters map.
      *
@@ -115,14 +111,14 @@ public class AppHandler extends AbstractHandler {
      * @return int
      * @throws IllegalArgumentException If aParameters doesnt contain aKey, or if we catch aNumberFormatException
      */
-    private int getIntParameter(final Map<String, String> aParameters, final String aKey, final StringJoiner queryBuilder, final int minimal) throws IllegalArgumentException {
+    private int getIntParameter(final Map<String, String> aParameters, final String aKey, final StringJoiner queryBuilder) throws IllegalArgumentException {
         try {
             final int intValue = Integer.parseInt(this.getStringParameter(aParameters, aKey, null));
             if(queryBuilder != null) {
                 queryBuilder.add(Integer.toString(intValue));
             }
-            if(intValue < minimal){
-                throw new IllegalArgumentException("Parameter '" + aKey + "' must be greater or equals to "+minimal);
+            if(intValue < AppHandler.MINIMAL_INT){
+                throw new IllegalArgumentException("Parameter '" + aKey + "' must be greater or equals to "+AppHandler.MINIMAL_INT);
             }
             return intValue;
         } catch (final NumberFormatException e) {
