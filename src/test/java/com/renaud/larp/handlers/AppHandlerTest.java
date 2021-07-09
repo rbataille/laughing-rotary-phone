@@ -93,9 +93,12 @@ public class AppHandlerTest {
 
     @Test
     public void withZeroTest(){
-        final JsonResponse r2 = AppHandlerTest.responseFromInt1Int2("0", "0");
-        Assert.assertEquals("error", r2.getObject().get("state").getAsString());
-        Assert.assertEquals("Parameter 'int1' must be greater or equals to 1", r2.getObject().get("reason").getAsString());
+        final JsonResponse r1 = AppHandlerTest.responseFromInt1Int2("0", "0");
+        Assert.assertEquals("error", r1.getObject().get("state").getAsString());
+        Assert.assertEquals("Parameter 'int1' must be greater or equals to "+AppHandler.MINIMAL_INT, r1.getObject().get("reason").getAsString());
+
+        final JsonResponse r2 = AppHandlerTest.responseFromInt1Int2("1", "1");
+        Assert.assertEquals("success", r2.getObject().get("state").getAsString());
     }
 
     @Test
