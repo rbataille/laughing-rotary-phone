@@ -103,6 +103,10 @@ public class AppHandler extends AbstractHandler {
         }
     }
 
+    private int getIntParameter(final Map<String, String> aParameters, final String aKey, final StringJoiner queryBuilder) throws IllegalArgumentException {
+        return this.getIntParameter(aParameters, aKey, queryBuilder, 1);
+    }
+
     /**
      * Return an int from the aParameters map.
      *
@@ -111,11 +115,14 @@ public class AppHandler extends AbstractHandler {
      * @return int
      * @throws IllegalArgumentException If aParameters doesnt contain aKey, or if we catch aNumberFormatException
      */
-    private int getIntParameter(final Map<String, String> aParameters, final String aKey, final StringJoiner queryBuilder) throws IllegalArgumentException {
+    private int getIntParameter(final Map<String, String> aParameters, final String aKey, final StringJoiner queryBuilder, final int minimal) throws IllegalArgumentException {
         try {
             final int intValue = Integer.parseInt(this.getStringParameter(aParameters, aKey, null));
             if(queryBuilder != null) {
                 queryBuilder.add(Integer.toString(intValue));
+            }
+            if(intValue < minimal){
+                throw new IllegalArgumentException("Parameter '" + aKey + "' must be greater or equals to "+minimal);
             }
             return intValue;
         } catch (final NumberFormatException e) {
@@ -128,8 +135,8 @@ public class AppHandler extends AbstractHandler {
      * @param parameters The list of parameter.
      * @param aKey The key
      * @param queryBuilder The StringJoiner use to build the query that while be log in the storage
-     * @return
-     * @throws IllegalArgumentException
+     * @return THe string.
+     * @throws IllegalArgumentException If !parameters.contains(aKey)
      */
     private String getStringParameter(final Map<String, String> parameters, final String aKey, final StringJoiner queryBuilder) throws IllegalArgumentException {
         if (!parameters.containsKey(aKey)) {
