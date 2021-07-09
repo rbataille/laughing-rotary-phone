@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 public class AppHandler extends AbstractHandler {
-
+    static final Integer MINIMAL_INT = 1;
     static final String HELP_DESCRIPTION = "Returns a list of strings with numbers from 1 to limit, where: all multiples of int1 are replaced by str1, all multiples of int2\n" +
             " are replaced by str2, all multiples of int1 and int2 are replaced by str1str2.";
 
@@ -117,6 +117,9 @@ public class AppHandler extends AbstractHandler {
             if(queryBuilder != null) {
                 queryBuilder.add(Integer.toString(intValue));
             }
+            if(intValue < AppHandler.MINIMAL_INT){
+                throw new IllegalArgumentException("Parameter '" + aKey + "' must be greater or equals to "+AppHandler.MINIMAL_INT);
+            }
             return intValue;
         } catch (final NumberFormatException e) {
             throw new IllegalArgumentException("Parameter '" + aKey + "' need to be an int");
@@ -128,8 +131,8 @@ public class AppHandler extends AbstractHandler {
      * @param parameters The list of parameter.
      * @param aKey The key
      * @param queryBuilder The StringJoiner use to build the query that while be log in the storage
-     * @return
-     * @throws IllegalArgumentException
+     * @return THe string.
+     * @throws IllegalArgumentException If !parameters.contains(aKey)
      */
     private String getStringParameter(final Map<String, String> parameters, final String aKey, final StringJoiner queryBuilder) throws IllegalArgumentException {
         if (!parameters.containsKey(aKey)) {

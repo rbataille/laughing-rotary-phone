@@ -82,13 +82,23 @@ public class AppHandlerTest {
     public void handleTest() {
         final JsonResponse r1 = AppHandlerTest.responseFromInt1Int2("3", "5");
         final JsonArray e1 = new JsonArray();
-        e1.add(new JsonPrimitive("1,2,fizz,4,buzz,fizz,7,8,fizz,buzz,11,fizz,13,14,fizzbuzz,16"));;
+        e1.add(new JsonPrimitive("1,2,fizz,4,buzz,fizz,7,8,fizz,buzz,11,fizz,13,14,fizzbuzz,16"));
         AppHandlerTest.checkSuccessResponse(r1, e1);
 
         final JsonResponse r2 = AppHandlerTest.responseFromInt1Int2("4", "8");
         final JsonArray e2 = new JsonArray();
-        e2.add(new JsonPrimitive("1,2,3,fizz,5,6,7,fizzbuzz,9,10,11,fizz,13,14,15,fizzbuzz"));;
+        e2.add(new JsonPrimitive("1,2,3,fizz,5,6,7,fizzbuzz,9,10,11,fizz,13,14,15,fizzbuzz"));
         AppHandlerTest.checkSuccessResponse(r2, e2);
+    }
+
+    @Test
+    public void withZeroTest(){
+        final JsonResponse r1 = AppHandlerTest.responseFromInt1Int2("0", "0");
+        Assert.assertEquals("error", r1.getObject().get("state").getAsString());
+        Assert.assertEquals("Parameter 'int1' must be greater or equals to "+AppHandler.MINIMAL_INT, r1.getObject().get("reason").getAsString());
+
+        final JsonResponse r2 = AppHandlerTest.responseFromInt1Int2("1", "1");
+        Assert.assertEquals("success", r2.getObject().get("state").getAsString());
     }
 
     @Test
